@@ -1,7 +1,9 @@
-﻿namespace LinqQueryParser.Engine
+﻿using LinqQueryParser.Engine.Models;
+
+namespace LinqQueryParser.Engine
 {
 	public interface IQueryParserEngine
 	{
-		string ParseQuery(string query);
+		EngineResult ParseQuery(string query);
 	}
 }

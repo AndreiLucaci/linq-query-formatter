@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqQueryParser.Tests", "Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqQueryParser.Engine", "LinqQueryParser.Engine\LinqQueryParser.Engine.csproj", "{7527C3DB-0465-40C4-B59F-831D0F1E194C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqQueryParser.WinForm", "LinqQueryParser.WinForm\LinqQueryParser.WinForm.csproj", "{234858C3-95D6-437C-A11F-A7EFFCC2643A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7527C3DB-0465-40C4-B59F-831D0F1E194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7527C3DB-0465-40C4-B59F-831D0F1E194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7527C3DB-0465-40C4-B59F-831D0F1E194C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{234858C3-95D6-437C-A11F-A7EFFCC2643A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{234858C3-95D6-437C-A11F-A7EFFCC2643A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{234858C3-95D6-437C-A11F-A7EFFCC2643A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{234858C3-95D6-437C-A11F-A7EFFCC2643A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

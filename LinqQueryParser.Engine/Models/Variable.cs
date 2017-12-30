@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace LinqQueryParser.Engine.Models
@@ -24,5 +25,11 @@ namespace LinqQueryParser.Engine.Models
 
 		private string GetNumberSetValue() => $"SET {Name} = {Value}";
 		private string GetStringSetValue() => $"SET {Name} = '{Value}'";
+
+		public override string ToString()
+		{
+			return
+				$"Name: {Name}{Environment.NewLine}Type: {Type}{Environment.NewLine}Size: {Size}{Environment.NewLine}Value: {Value}{Environment.NewLine}{Environment.NewLine}";
+		}
 	}
 }

@@ -10,7 +10,7 @@ namespace LinqQueryParser.Engine
 {
 	public class QueryEngineParser : IQueryParserEngine
 	{
-		public string ParseQuery(string query)
+		public EngineResult ParseQuery(string query)
 		{
 			var commentedLines = GetCommentLines(query).Select(i => i.Trim('-', ' '));
 			var variableList = commentedLines.Select(CreateVariable).Where(i => i != null).ToList();
@@ -23,12 +23,23 @@ namespace LinqQueryParser.Engine
 
 			var parsedQuery = $"{declareBlock}{Environment.NewLine}{setBlock}{Environment.NewLine}{query}";
 
-			return parsedQuery;
+			return new EngineResult
+			{
+				ParsedQuery = parsedQuery,
+				Variables = variableList
+			};
 		}
 
 		public IEnumerable<string> GetCommentLines(string query)
 		{
-			return Regex.Split(query, Environment.NewLine).Where(i => i.Trim().StartsWith("--"));
+			var splitted = Regex.Split(query, Environment.NewLine).Where(i => i.Trim().StartsWith("--")).ToArray();
+
+			if (!splitted.Any())
+			{
+				splitted = Regex.Split(query, "\n").Where(i => i.Trim().StartsWith("--")).ToArray();
+			}
+
+			return splitted;
 		}
 
 		private string CreateDeclareLine(Variable variable)
