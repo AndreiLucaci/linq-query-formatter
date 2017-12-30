@@ -44,6 +44,7 @@
     <Compile Include="Helper\StringExtensions.cs" />
     <Compile Include="Helper\TypeMapper.cs" />
     <Compile Include="Helper\Types.cs" />
+    <Compile Include="Models\Types.cs" />
     <Compile Include="QueryEngineParser.cs" />
     <Compile Include="IQueryParserEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

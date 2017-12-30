@@ -33,35 +33,39 @@ namespace LinqQueryParser.Engine
 
 		private string CreateDeclareLine(Variable variable)
 		{
-			return string.Format(LinqConstants.DECLARE_LINE, variable.Name, variable.Type);
+			return (!string.IsNullOrEmpty(variable.Size) && variable.GetSizeValue() != "-1")
+				? string.Format(LinqConstants.DECLARE_LINE_SIZE, variable.Name, variable.Type, variable.GetSizeValue())
+				: string.Format(LinqConstants.DECLARE_LINE, variable.Name, variable.Type);
 		}
 
-		private string CreateSetLine(Variable variable) 
-			=> string.Format(LinqConstants.SET_LINE, variable.Name, variable.Value);
+		private string CreateSetLine(Variable variable)
+		{
+			return string.Format(LinqConstants.SET_LINE, variable.Name, variable.Value);
+		}
 
 		// @p0: Input Int (Size = -1; Prec = 0; Scale = 0) [1]
 		private Variable CreateVariable(string line)
 		{
-			if (!line.StartsWith(@"@"))
+			if (line.StartsWith(@"@"))
 			{
-				return null;
+				var name = Regex.Match(line, "(@.*?):").Value;
+				var size = (Regex.Match(line, "Size = (.*?)[\\)\\;]").Value).Trim(';', ' ');
+				var rawType = Regex.Match(line, "Input (.*?) ").Value;
+				var type = rawType.GetTypeFromRawType();
+				var value = Regex.Match(line, "\\[(.*?)\\]").Value.Trim('[', ']');
+
+				return new Variable
+				{
+					Name = name.PurgeName(),
+					Size = size,
+					Type = type,
+					RawType = rawType,
+					Value = value.GetValueFromRawValue(type),
+					Rawvalue = value
+				};
 			}
 
-			var name = Regex.Match(line, "(@.*?):").Value;
-			var size = Regex.Match(line, "Size = (.*?)[\\)\\;]").Value;
-			var rawType = Regex.Match(line, "Input (.*?) ").Value;
-			var type = rawType.GetTypeFromRawType();
-			var value = Regex.Match(line, "\\[(.*?)\\]").Value.Trim('[', ']');
-
-			return new Variable
-			{
-				Name = name.PurgeName(),
-				Size = size,
-				Type = type,
-				RawType = rawType,
-				Value = value.GetValueFromRawValue(type),
-				Rawvalue = value
-			};
+			return null;
 		}
 	}
 }
